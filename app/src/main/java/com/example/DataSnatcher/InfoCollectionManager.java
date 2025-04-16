@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.example.DataSnatcher.collector.AudioInfo.AudioInfoCollector;
+import com.example.DataSnatcher.collector.DeviceIdentifierInfoCollection;
 import com.example.DataSnatcher.collector.IInfoCollector;
 import com.example.DataSnatcher.collector.SensorInfo.SensorInfoCollector;
 
@@ -28,6 +29,7 @@ public class InfoCollectionManager {
         // 在此处加
         collectors.add(new AudioInfoCollector());
         collectors.add(new SensorInfoCollector(context));
+        collectors.add(new DeviceIdentifierInfoCollection(context, activity));
     }
 
     public interface CollectAllCallback {
