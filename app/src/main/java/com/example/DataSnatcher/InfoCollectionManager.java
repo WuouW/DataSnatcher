@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.example.DataSnatcher.collector.AudioInfo.AudioInfoCollector;
+import com.example.DataSnatcher.collector.BatteryInfoCollector;
+import com.example.DataSnatcher.collector.CPUInfoCollector;
 import com.example.DataSnatcher.collector.DeviceIdentifierInfoCollection;
 import com.example.DataSnatcher.collector.IInfoCollector;
 import com.example.DataSnatcher.collector.SensorInfo.SensorInfoCollector;
 import com.example.DataSnatcher.collector.WifiInfoCollector;
 import com.example.DataSnatcher.collector.BatteryInfoCollector;
 import com.example.DataSnatcher.collector.CPUInfoCollector;
+import com.example.DataSnatcher.collector.SimCardInfo.SimCardInfoCollector;
+import com.example.DataSnatcher.collector.StorageInfo.StorageInfoCollector;
 
 import org.json.JSONObject;
 
@@ -36,6 +40,8 @@ public class InfoCollectionManager {
         collectors.add(new BatteryInfoCollector(context));
         collectors.add(new CPUInfoCollector(context));
         collectors.add(new WifiInfoCollector(context));
+        collectors.add(new SimCardInfoCollector(context));
+        collectors.add(new StorageInfoCollector(context));
     }
 
     public interface CollectAllCallback {
