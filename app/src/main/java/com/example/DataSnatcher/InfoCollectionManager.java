@@ -4,9 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.example.DataSnatcher.collector.AudioInfo.AudioInfoCollector;
+import com.example.DataSnatcher.collector.BatteryInfoCollector;
+import com.example.DataSnatcher.collector.CPUInfoCollector;
 import com.example.DataSnatcher.collector.DeviceIdentifierInfoCollection;
 import com.example.DataSnatcher.collector.IInfoCollector;
 import com.example.DataSnatcher.collector.SensorInfo.SensorInfoCollector;
+import com.example.DataSnatcher.collector.SimCardInfo.SimCardInfoCollector;
+import com.example.DataSnatcher.collector.StorageInfo.StorageInfoCollector;
 
 import org.json.JSONObject;
 
@@ -29,7 +33,11 @@ public class InfoCollectionManager {
         // 在此处加
         collectors.add(new AudioInfoCollector());
         collectors.add(new SensorInfoCollector(context));
-        collectors.add(new DeviceIdentifierInfoCollection(context, activity));
+        collectors.add(new SimCardInfoCollector(context));
+        collectors.add(new StorageInfoCollector(context));
+        collectors.add(new BatteryInfoCollector(context));
+        collectors.add(new CPUInfoCollector(context));
+        //collectors.add(new DeviceIdentifierInfoCollection(context, activity));
     }
 
     public interface CollectAllCallback {
