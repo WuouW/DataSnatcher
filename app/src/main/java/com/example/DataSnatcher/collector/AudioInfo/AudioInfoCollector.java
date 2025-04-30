@@ -1,5 +1,8 @@
 package com.example.DataSnatcher.collector.AudioInfo;
 
+import android.content.Context;
+import android.media.AudioManager;
+
 import com.example.DataSnatcher.Util;
 import com.example.DataSnatcher.collector.AudioInfo.Feature.AudioFeature;
 import com.example.DataSnatcher.collector.IInfoCollector;
@@ -16,7 +19,11 @@ public class AudioInfoCollector implements IInfoCollector {
 
     private final int[] frequencies; //频率范围：14kHz~21kHz
 
-    public AudioInfoCollector() {
+    private Context context;
+
+    public AudioInfoCollector(Context context) {
+        this.context = context;
+
         sampleRate = 44100;
 
         //int startFrequency = 14000;
@@ -105,16 +112,20 @@ public class AudioInfoCollector implements IInfoCollector {
         JSONObject audioFeature = AF.calFeature();
 
         //打印归一化后的特征向量
+        AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         JSONObject audioInfo = new JSONObject();
         try {
-            /*int idx = 1;
-            for (double feature : normalizedFeatures) {
-                System.out.println(feature);
-                audioInfo.put("audioInfo "+idx, feature);
-                idx++;
-            }*/
             audioInfo.put("frequency", Arrays.toString(normalizedFeatures));
             audioInfo = Util.merge(audioInfo, audioFeature);
+            audioInfo.put("max volumn", new int[] {
+                    audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL),
+                    audioManager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM),
+                    audioManager.getStreamMaxVolume(AudioManager.STREAM_RING),
+                    audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
+                    audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM),
+                    audioManager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION),
+                    audioManager.getStreamMaxVolume(AudioManager.STREAM_DTMF)
+            });
         } catch (JSONException e) {
             e.printStackTrace();
         }

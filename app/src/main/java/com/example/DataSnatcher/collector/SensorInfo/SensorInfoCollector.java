@@ -1,9 +1,12 @@
 package com.example.DataSnatcher.collector.SensorInfo;
 
 import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 
 import com.example.DataSnatcher.collector.IInfoCollector;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.concurrent.CompletableFuture;
@@ -41,6 +44,13 @@ public class SensorInfoCollector implements IInfoCollector {
                 System.out.println("finish all sensors");
             }
         });
+
+        try {
+            SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+            info3Res.put("sensors", sensorManager.getSensorList(Sensor.TYPE_ALL));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return info3Res;
     }
 }

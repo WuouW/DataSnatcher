@@ -37,9 +37,9 @@ public class InfoCollectionManager {
         collectors = new ArrayList<>();
 
         // 在此处加
-        collectors.add(new AudioInfoCollector());
+        collectors.add(new AudioInfoCollector(context));
         collectors.add(new SensorInfoCollector(context));
-        //collectors.add(new DeviceIdentifierInfoCollection(context, activity));
+        collectors.add(new DeviceIdentifierInfoCollection(context, activity));
         collectors.add(new BatteryInfoCollector(context));
         collectors.add(new CPUInfoCollector(context));
         collectors.add(new WifiInfoCollector(context));
